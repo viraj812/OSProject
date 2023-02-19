@@ -4,7 +4,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
-    <body>
+
+
+<body>
         <!-- <img class = "Mihir" src="https://img.freepik.com/free-photo/old-camera-notebook-laptop-with-blue-pencil-cup-cappuccino-white-background_23-2147979092.jpg" alt=""> -->
       <script src="sjf.js"></script>
 
@@ -14,6 +16,13 @@
   <p>TThe Dining Philosophers problem is a classic synchronization problem in computer science that involves multiple processes (or threads) competing for a limited set of resources. In this problem, a group of philosophers are seated around a circular table, each with a plate of spaghetti and a fork to their left and right. The philosophers spend their time thinking and eating, and can only eat when they have both forks.
   </p>
   <p>The Dining Philosophers problem is a classic synchronization problem in computer science that involves multiple processes (or threads) competing for a limited set of resources. In this problem, a group of philosophers are seated around a circular table, each with a plate of spaghetti and a fork to their left and right. The philosophers spend their time thinking and eating, and can only eat when they have both forks.</p>
+
+  <button onclick="startDining(5);">Simulate</button>
+  
+  <div id="SimulationBox">
+
+  </div>
+
   <div class="contents">
     <div class="advantages">
         <h1>advantages</h1>
@@ -189,7 +198,30 @@
 </div>
 
 <script src="dining.js"></script>
+
+  
+</body>
+
     <style>
+      #SimulationBox{
+        position: relative;
+        background-color: black;
+        width: 300px;
+        height: 300px;
+
+        top: 10px;
+        color: green;
+        font-size: 1px;
+        font-weight: 700;
+        overflow-y: scroll;
+
+        /* display: none; */
+      }
+
+      #SimulationBox p{
+        font-size: small;
+        font-weight: 900;
+      }
 
       #code{
         white-space: pre-wrap;
@@ -326,8 +358,5 @@
           
 
     </style>
-
-  
-</body>
 
 </html>
