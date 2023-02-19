@@ -1,3 +1,13 @@
+function addText(text){
+    var box = document.getElementById("SimulationBox");
+    var para = document.createElement("p");
+    var content = document.createTextNode(text);
+    box.appendChild(para);
+    para.appendChild(content);
+
+    box.scrollTop = box.scrollHeight;
+}
+
 class Semaphore {
     constructor(value) {
       this.value = value;
@@ -37,31 +47,40 @@ class Semaphore {
   
       if (this.eating) {
         console.log(`${name} is already eating`);
+        addText(`${name} is already eating`);
         return;
       }
   
       console.log(`${name} is Thinking`);
-  
+      addText(`${name} is Thinking`);
+
       await leftFork.acquire();
       console.log(`${name} has acquired left fork`);
+      addText(`${name} has acquired left fork`);
       await rightFork.acquire();
       console.log(`${name} has acquired right fork`);
+      addText(`${name} has acquired right fork`);
   
       console.log(`${name} is eating`);
+      addText(`${name} is eating`);
+
       this.eating = true;
       await new Promise(resolve => setTimeout(resolve, Math.random() * 5000 + 1000));
       console.log(`${name} has finished eating`);
   
       leftFork.release();
       console.log(`${name} has released left fork`);
+      addText(`${name} has released left fork`);
       rightFork.release();
       console.log(`${name} has released right fork`);
+      addText(`${name} has released right fork`);
   
       this.eating = false;
     }
   }
   
   function startDining(numPhilosophers) {
+    // document.getElementById("SimulationBox").style.display = "initial";
     const forks = Array.from({ length: numPhilosophers }, (_, i) => new Semaphore(1));
     const philosophers = Array.from({ length: numPhilosophers }, (_, i) => {
       const leftFork = forks[i];
