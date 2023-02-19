@@ -1,12 +1,13 @@
 <html>
     <head>
+        <header><h1>OS Algorithms</h1></header>
         <title>Operating Sytem Algorithms</title>
-        <h1>OS Algorithms</h1>
     </head>
-
+    
     <body>
+        
         <script src="index.js"></script>
-
+        
         
         <p id="theory">What is an operating system?</p>
         
@@ -20,7 +21,7 @@
 
             <a href="sjf.html">Shortest Job First CPU Scheduling Algorithm</a>
 
-            <a href="">Dining Philosophers Algorithm</a>
+            <a href="dining.html">Dining Philosophers Algorithm</a>
 
             <a href="">C Look Disk Scheduling Algorithm</a>
 
@@ -32,28 +33,47 @@
         <div class="box-container">
 
             <div id="box1" onclick="openPage('sjf.html')">
-                <p>Shortest Job First Algorithm</p>
+                <p class="heading">Shortest Job First Algorithm</p>
                 <p>Shortest job first is a scheduling algorithm in which the process with the smallest execution time is selected for execution next. Shortest job first can be either preemptive or non-preemptive. Owing to its simple nature, shortest job first is considered optimal. It also reduces the average waiting time for other processes awaiting execution.</p>
             </div>
 
-            <div id="box2">
-                <p>Dining Philosophers Algorithm</p>
+            <div id="box2" onclick="openPage('dining.html')">
+                <p class="heading"> Dining philosophers problem with semaphore </p>
+
+                <p>The Dining Philosophers problem can be solved using semaphores, which are a type of synchronization mechanism used in concurrent programming. Semaphores are a way to protect shared resources by controlling access to them and ensuring that only one process can access the resource at a time. </p>
+                
             </div>
             <p></p>
-            <div id="box3"><p>C Look Disk Scheduling Algorithm</p></div>
-            <div id="box4"><p>First In First Out Page Replacement Algorithm</p></div>
+            <div id="box3">
+                <p class="heading">C Look Disk Scheduling Algorithm</p>
+                <p>The Look (also known as "Scan") and C-Look (also known as "Circular Scan") disk scheduling algorithms are two closely related methods used to optimize the movement of read/write heads on a hard disk. In these algorithms, the disk is divided into several concentric tracks, and each track is divided into smaller sections called sectors. The read/write head moves in a linear fashion across the disk, reading or writing data from the sectors it encounters.</p>
+            </div>
+            <div id="box4"><p class="heading">First In First Out Page Replacement Algorithm</p></div>
         </div>
 
+    </body>
+
         <style>
+
+            header{
+                /* background-color: rgb(0, 0, 0); */
+                color: rgb(0, 0, 0);
+                background-image: url("headerbg.jpg");
+                /* background-size: 100%; */
+            }
             h1{
                 text-align: center;
                 font-size: xxx-large;
                 text-decoration: underline solid white ;
-                color: rgb(192, 195, 10);
+                color: rgb(0, 0, 0);
             }
             
             body{
-                background-color: rgb(42, 8, 90);
+                /* background-color: rgb(42, 8, 90); */
+                background-image: url("bodybg.jpg");
+                background-size: 100%;
+                margin-left: 50px;
+                margin-right: 50px;
             }
 
             button{
@@ -81,7 +101,7 @@
                 position: absolute;
                 display: none;
                 min-width: 200px;
-                top: 110%;
+                top: 100px;
                 box-shadow: 0px 8px 16px 0px rgba(33, 29, 92, 0.2);
                 z-index: 1;
             }
@@ -103,23 +123,25 @@
             a:hover{background-color: rgb(11, 110, 26);}
 
             #theory{
-                font-weight: bold;
-                font-size: xx-large;
-                color: rgb(218, 5, 5);
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 35px;
+                font-weight: bolder;
+                color: rgb(255, 255, 255);
             }
-
+            
             #content{
-                font-size: 25px;
+                font-size: 30px;
+                font-weight: bold;
                 color: aliceblue;
             }
             
             .box-container{
                 position: relative;
                 top: 20px;
-                text-align: center;
             }
-
+            
             .box-container div{
+                /* text-align: center; */
                 display: inline-block;
                 vertical-align: top;
                 position: relative;
@@ -128,12 +150,14 @@
                 width: 400px;
 
 
-                margin: 70px;
+                margin: 50px;
                 padding: 20px 30px;
 
                 border-radius: 20px 20px 20px 20px;
                 font-size: 20px;
                 font-weight: 700;
+                font-family: 'Courier New', Courier, monospace;
+
                 box-shadow: 20px 20px 5px 2px;
             }
             
@@ -152,8 +176,13 @@
             #box4{
                 background-color: rgb(36, 115, 36);
             }
+
+            .heading{
+                font-size: 30px;
+                font-weight: bolder;
+                color: aliceblue;
+                margin-bottom: 30px;
+            }
         </style>
 
-    </body>
-
-</html> 
+</html>
