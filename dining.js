@@ -79,8 +79,10 @@ class Semaphore {
     }
   }
   
-  function startDining(numPhilosophers) {
-    // document.getElementById("SimulationBox").style.display = "initial";
+  function startDining() {
+    var numPhilosophers = document.getElementById("numPhilosophers").value;
+    numPhilosophers = parseInt(numPhilosophers);
+
     const forks = Array.from({ length: numPhilosophers }, (_, i) => new Semaphore(1));
     const philosophers = Array.from({ length: numPhilosophers }, (_, i) => {
       const leftFork = forks[i];
@@ -93,6 +95,6 @@ class Semaphore {
       philosophers[randomIndex].eat();
     }, 3000);
   }
-  
-//   startDining(5);
+
+  // startDining(numPhilosophers);
   
