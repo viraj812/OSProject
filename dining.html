@@ -1,12 +1,13 @@
 <html>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <head><h1 class="MK">Dining Philosophers Algorithm</h1></head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 
 
 <body>
+  <header>Philosophers Algorithm</header>
         <!-- <img class = "Mihir" src="https://img.freepik.com/free-photo/old-camera-notebook-laptop-with-blue-pencil-cup-cappuccino-white-background_23-2147979092.jpg" alt=""> -->
       <script src="sjf.js"></script>
 
@@ -17,15 +18,16 @@
   </p>
   <p>The Dining Philosophers problem is a classic synchronization problem in computer science that involves multiple processes (or threads) competing for a limited set of resources. In this problem, a group of philosophers are seated around a circular table, each with a plate of spaghetti and a fork to their left and right. The philosophers spend their time thinking and eating, and can only eat when they have both forks.</p>
 
-  <button onclick="startDining(5);">Simulate</button>
   
-  <div id="SimulationBox">
-
+  <input type="text"  id="numPhilosophers" placeholder="Enter Number of Philosophers/Forks/Semaphores">
+  <button onclick="startDining();">Simulate</button>
+  <div id="SimulationContainer">
+    <div id="SimulationBox"></div>
   </div>
 
   <div class="contents">
     <div class="advantages">
-        <h1>advantages</h1>
+        <h1>Advantages</h1>
         <img src="./Dining _pic.jpg" alt="">
     </div>
     <div class="advantages-pic">
@@ -65,15 +67,6 @@
       <li>=>  Define a semaphore for each fork, initialized to 1.</li>
       <li>=>  Define a semaphore for each fork, initialized to 1.</li>
       <li>=>  Each philosopher is a separate process (or thread), which repeatedly executes the following steps:\n
-              
-              
-              
-              
-              
-              
-              
-              
-
       </li>
       <li>    &nbsp;a.  Think for a while.&nbsp;</li>
       <li>    b.  Wait on the table semaphore to ensure that no more than (n - 1) philosophers are eating at the same time.</li>
@@ -203,19 +196,61 @@
 </body>
 
     <style>
+      header{
+        background-color: #5b09b8;
+        color: aliceblue;
+        text-align: center;
+
+        padding: 10px;
+
+        font-size: xx-large;
+        font-weight: 700;
+      }
+
+      input{
+        width: 200px;
+        height: 50px;
+
+        margin: 40px;
+
+        background-color: #5b09b8;
+        color: aliceblue;
+
+        text-align: center;
+
+        border-radius: 30px;
+        border-color: black;
+        border-width: 2px;
+      }
+
+      ::placeholder{
+        text-align: center;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+      }
+
+      button{
+        position: relative;
+
+        width: 80px;
+        height: 60px;
+        border-radius: 20px;
+
+        background-color: rgb(20, 14, 14);
+        color: greenyellow;
+      }
+
       #SimulationBox{
         position: relative;
         background-color: black;
-        width: 300px;
+        width: 400px;
         height: 300px;
-
+        margin-left: 40px;
         top: 10px;
         color: green;
         font-size: 1px;
         font-weight: 700;
         overflow-y: scroll;
-
-        /* display: none; */
       }
 
       #SimulationBox p{
@@ -223,8 +258,16 @@
         font-weight: 900;
       }
 
+      #SimulationContainer{
+        display: block;
+        position: relative;
+        text-align: center;
+
+      }
+
       #code{
         white-space: pre-wrap;
+        font-weight: 600;
       }
 
       #myChart{
@@ -248,7 +291,7 @@
       }
 
       .main-container p{
-        font-weight: 100;
+        font-weight: 600;
         text-align: justify;
         padding: 1.3em;
         padding-top: 0.3em;
@@ -276,6 +319,7 @@
         text-align: left;
         background-color: #f1f1f1;
         border-color: black;
+        font-weight: 600;
       }
 
       .algorithm-div h1{
@@ -297,10 +341,10 @@
         
           color: rgb(31, 32, 31)d;
           margin-top: 8em;
-          height: 5em;
+          height: 7em;
           margin-left: 0.2em;
           margin-bottom: 10000px;
-          
+    
           line-height: 1.5em;
           margin: 0em;
           padding-top: 0em;
@@ -353,7 +397,7 @@
           
           p{
             font-size: 25px;
-            font-weight: 600;
+            font-weight: 900;
           }
           
 
