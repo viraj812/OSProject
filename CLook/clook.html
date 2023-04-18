@@ -1,0 +1,355 @@
+<html>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  
+  
+  <body>
+    <header>Look/C-Look disk scheduling algorithm</header>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="clook.js"></script>
+
+  <div class="main-container">
+
+  <h1>Introduction</h1>    
+  <p>The Look/C-Look disk scheduling algorithm is a modified version of the SCAN algorithm that operates in the same way but with some differences in how it handles the direction of the disk head movement.</p>
+  <p>The Look algorithm moves the disk head in a single direction (either towards the outermost or innermost cylinder) until it reaches the last request in that direction, then it reverses direction and moves back in the opposite direction. This can lead to some requests being starved if they are located in the opposite direction of the initial head movement.</p>
+  <p>The C-Look algorithm, on the other hand, works similarly to Look, but it always moves the disk head in the same direction (towards the outermost or innermost cylinder), even after it reaches the last request in that direction. This ensures that all requests are processed and no requests are starved.</p>
+
+  <div id="Requests"></div>
+    <h1>Calculation: </h1>
+  <input type="text"  id="requestValue" placeholder="Enter Requests" onfocus="clear()">
+  <button onclick="addRequest();">Add</button>
+
+    <br>
+
+  <input type="text"  id="headValue" placeholder="Enter Head Value" onfocus="clear()">
+  <button onclick="setHead();">Set</button>
+
+    <br>
+  
+  <button class="individual" id="Simulate" onclick="callClook()">Simulate</button>
+  
+  <script> 
+    function showGraph(){
+    document.getElementById("chart").style.display = "initial";
+
+    requestNumber = requestNumber.filter( e => {return e !== null});
+
+    requests = requests.filter( e => { return e !== null});
+
+    var chart = new Chart("chart", {
+      type: "line",
+    
+  data: {
+    labels: requests,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: requestNumber
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: { 
+      yAxes: [{ticks: {min: 1, max:10}}],
+    }
+  }
+    });
+  }
+
+  </script>
+
+
+  <button id="showGraph" class="individual" onclick="showGraph()">Show Graph</button>
+
+  <div id="SimulationContainer">
+
+  <div id="SimulationContainer">
+    <div id="SimulationBox"></div>
+
+  <canvas id="chart" style="width :100%; max-width: 700px;"></canvas>
+
+
+     <div class = "Mihir2">
+      <h1>Advantages</h1>
+      <p>The Look/C-Look algorithm can significantly reduce the average seek time compared to the FCFS and SCAN algorithms, especially when there are requests clustered close together on the disk.</p>
+      <p>The Look/C-Look algorithm ensures that all requests are processed and no requests are starved, unlike the SCAN algorithm which can leave requests in the opposite direction of the initial head movement unprocessed.</p>
+      <p>The Look/C-Look algorithm is relatively simple to implement and requires less overhead than more complex algorithms like the C-SCAN algorithm.</p>
+    </div> 
+
+    <div class = "MIhir3">
+      <h1>Disadvantages</h1>
+      <p>High variance in response time: The Look/C-Look algorithm can lead to high variance in response time. This can occur because it does not guarantee a minimum waiting time for a request to be serviced.</p>
+      <p>Inefficient for certain workloads: Look/C-Look algorithm is not efficient for certain types of workloads such as heavy read/write loads or random access patterns. In these cases, other algorithms like SCAN or C-SCAN may perform better.</p>
+      <p>May lead to starvation: If the disk requests are skewed in one direction, then the Look/C-Look algorithm may lead to starvation of certain requests. This can happen if the head moves back and forth between a small range of requests.</p>
+      <p>Not optimal for real-time systems: The Look/C-Look algorithm is not suitable for real-time systems, where the timing of disk accesses is critical. This is because it does not prioritize certain requests over others.</p>
+      <p>Requires additional bookkeeping: The Look/C-Look algorithm requires additional bookkeeping to maintain the list of pending requests. This can increase the overhead on the system, especially if there are a large number of requests pending.</p>
+      <p>Limited performance gains: The Look/C-Look algorithm may not provide significant performance gains over other algorithms like FCFS or SSTF. This is because its performance is highly dependent on the specific workload and request distribution.</p>
+    </div>
+
+
+      </div>
+  </div>
+  </div>
+
+  <div class="algorithm-div">
+    <h1>Algorithm :</h1>
+    <ul>
+      <p>(1)  Initialize variables:</p>
+      <p>=>     direction: the current direction the disk head is moving in (up or down)</p>
+      <p>=>     queue: a queue of pending disk requests</p>
+      <p>(2)  Sort the queue in ascending order of their position on the disk.</p>
+      <p>(3)  While the queue is not empty:</p>
+      <p>a.      Find the next request in the queue that is in the current direction of the disk head.3</p>
+      <p>b.      If there are no more requests in the current direction, change the direction of the disk head.</p>
+      <p>c.      If the direction is up, move the disk head to the next highest request position in the queue.</p>
+      <p>        If the direction is down, move the disk head to the next lowest request position in the queue.</p>
+      <p>d.      Remove the completed request from the queue.  </p>
+      <p>e.      Repeat steps a-d until the queue is empty.</p>
+      <p>(4)  If there are no more requests in the direction of the disk head, change direction and start again at step 3.</p>
+    </ul>
+  
+
+  </div>
+
+  </div>
+  </div>
+  <div class="M">
+    
+</div>
+</div>
+
+  
+</body>
+
+    <style>
+      header{
+        background-color: #037065;
+        color: aliceblue;
+        text-align: center;
+
+        padding: 10px;
+
+        font-size: xx-large;
+        font-weight: 700;
+      }
+
+      input{
+        width: 320px;
+        height: 50px;
+
+        margin: 20px;
+
+        background-color: #b80963;
+        color: aliceblue;
+
+        text-align: center;
+        /* font-size: large; */
+        font-weight: 500;
+        border-radius: 30px;
+        border-color: black;
+        border-width: 2px;
+
+      }
+
+      input:focus::placeholder{
+        color: transparent;
+        
+      }
+
+      ::placeholder{
+        text-align: center;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+      }
+
+      button{
+        position: relative;
+
+        width: 80px;
+        height: 60px;
+        border-radius: 20px;
+
+        background-color: rgb(20, 14, 14);
+        color: greenyellow;
+      }
+
+      #SimulationBox{
+        position: relative;
+        background-color: black;
+        width: 400px;
+        height: 300px;
+        margin-left: 40px;
+        top: 10px;
+        color: green;
+        font-size: 1px;
+        font-weight: 700;
+        overflow-y: scroll;
+      }
+
+      #SimulationBox p{
+        font-size: small;
+        font-weight: 900;
+      }
+
+      #SimulationContainer{
+        display: block;
+        position: relative;
+        text-align: center;
+
+      }
+
+      #code{
+        white-space: pre-wrap;
+        font-weight: 600;
+      }
+
+      .main-container {
+        font-family: 'Raleway', sans-serif;
+      }
+
+      .main-container p{
+        font-weight: 600;
+        text-align: justify;
+        padding: 1.3em;
+        padding-top: 0.3em;
+      }
+
+      .main-container h1{
+        color: #9e1e45;
+        text-decoration: none;
+        font-weight: 900;
+        margin-left: 0.7em;
+        padding-top: 2em;
+        text-align: center;
+      }
+
+      .contents{
+        display: flex;
+        padding: 1em;
+      }
+
+      .code-list{
+        margin-left: 2.5em;
+        padding-bottom: 2em;
+      }
+
+      .Mihier{
+        float: left;
+        width: 100%;
+        margin-left: 0.3em;
+      }
+      .algorithm-div{
+        text-align: left;
+        background-color: #f1f1f1;
+        border-color: black;
+        font-weight: 600;
+      }
+
+      .algorithm-div h1{
+        margin-left: 1.7em;
+      }
+
+      .algorithm-div li{
+        list-style-type: none;
+        padding: 1em;
+      }
+
+      .advantages{  
+        font-weight: 600;
+        text-align: justify;
+        padding: 1.3em;
+        padding-top: 0.3em;
+      
+      }
+      .M{
+        float: left;
+        width: 100%;
+        margin-left: 0.3em;
+      }
+
+      .advantages-pic {
+        font-family: 'Raleway', sans-serif;
+        color: rgb(31, 32, 31)d;
+        
+    }
+
+    .advantages img{
+      max-width: 100%;
+      max-height: 220%;
+      
+    }
+    .advantages img{
+      max-width:90%;
+      max-height: 210%;
+    }
+      
+      .MK{  
+        text-align: center;
+        margin-top: 2em;
+        font-family: 'Raleway', sans-serif;
+        color: #5b09b8;
+        font-weight: 900;
+        text-decoration: none;
+      }
+          body{
+            
+            background-color: #ffffff;
+            opacity: 1;
+            background: 0.01;
+            color: rgb(15, 15, 15);
+          }
+
+          h1{
+            color: rgb(171, 152, 152);
+            text-decoration: underline;
+          }
+          .Mihir{
+            background-size: cover;
+            width: 100%;
+            position: absolute;
+            z-index: -1;
+                
+          }
+          .Mkm{
+            
+            color:#5b09b8;
+          }
+          .Dining{
+            width: 30%;
+            justify-content: right;
+            
+            margin: 0 ;align-items: right;
+            left: 70%;
+            position: relative;
+          }
+          .content{
+            position: absolute;
+            top: +200px;
+          }
+          
+          p{
+            font-size: 25px;
+            font-weight: 900;
+          }
+          
+        
+        #Simulate, #showGraph{
+          display:inline;
+          margin-left: 40px;
+        }
+        #showGraph{
+          display: none;
+        }
+
+        canvas{
+          display: none;
+          margin: 20px;
+        }
+    </style>
+
+</html>
