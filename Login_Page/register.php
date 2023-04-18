@@ -7,7 +7,6 @@
 
     $input_password = hash("sha256", $input_password);
 
-    $num = 3;
     $servername = "localhost";
     $username = "root";
     $password = "root";
@@ -17,17 +16,22 @@
     if (!$connect) {
         die("Connection Failed.......\n");
     }
-    echo "Connection Successful....\n";
+    // echo "Connection Successful....\n";
+    $query1 = mysqli_query($connect, "use users");
+    $select_query = mysqli_query($connect, "select * from logininfo");
+
+    $num = mysqli_num_rows($select_query);
+    $num = $num + 1;
     
     $add_query = "insert into logininfo (id, username, password) values ('$num', '$input_username', '$input_password')";
-
-    $query1 = mysqli_query($connect, "use users");
+    
     $query = mysqli_query($connect, $add_query);
 
     $select_query = mysqli_query($connect, "select * from logininfo");
     if (mysqli_num_rows($select_query) == $num) {
-        echo "Succesfully Registered. ";
-        $num = $num + 1;
+        include 'login.html';
+        
+        echo "<script> alert('Succesfully Registered.'); </script>";
     }
     else{
 
