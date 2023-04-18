@@ -1,0 +1,309 @@
+<html>
+  <head><title>First In First Out</title></head>
+  <body>
+    <header> First-in first-out (FIFO) page replacement algorithm</header>
+    <script src="fifo.js" defer></script>
+  
+
+  <div class="main-container">
+
+  <h1>Introduction</h1>    
+  <p>First-In-First-Out (FIFO) is a page replacement algorithm used by operating systems to manage memory allocation. In this algorithm, the operating system maintains a queue of page frames, and the oldest page in the queue is the first one to be replaced. When a page fault occurs, the operating system replaces the oldest page in the queue with the new page.</p>
+  <p>For example, suppose a system has four page frames, and the following page references occur:</p>
+  <p>1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5</p>
+  <p>Initially, all page frames are empty. When the first page reference 1 comes in, it is loaded into the first page frame. When the second page reference 2 comes in, it is loaded into the second page frame. The third page reference 3 is loaded into the third page frame, and so on.</p>
+  <p>When the seventh page reference 5 comes in, all the page frames are occupied, so the operating system has to replace one of the existing pages. In the FIFO algorithm, the oldest page in the queue is replaced, which is the first page that was loaded, in this case page 1. So page 1 is replaced with page 5, and the queue is updated accordingly.</p>
+  <p>The process continues for the remaining page references, and each time a page fault occurs, the oldest page in the queue is replaced. The FIFO algorithm is simple and easy to implement but it suffers from the "Belady's Anomaly", which means increasing the number of page frames may actually increase the number of page faults.</p>
+
+
+  <div id="Requests"></div>
+
+  <input type="text"  id="Num_of_frames" placeholder="Enter Number of Frames" onfocus="clear()">
+
+    <br>
+
+  <input type="text"  id="string_length" placeholder="Enter Length of Reference String" onfocus="clear()">
+
+    <br>
+  
+  <input type="text"  id="reference_string" placeholder="Enter Reference String" onfocus="clear()">
+
+  <br>
+
+  <button class="individual" id="Simulate" onclick="getData()">Simulate</button>
+
+  <br>
+
+<div id="values" style="display: inline-block; margin-left: 20px;"></div>
+
+<center>
+    <table id="data" align="center" valign="center" cellspacing="0" cellpadding="2" border="2" style="background-color: aqua;">
+      
+    </table>
+</center>
+
+     <div class = "Mihir2">
+      <h1>Advantages</h1>
+      <p>Simplicity: The FIFO algorithm is simple to implement and easy to understand. It involves maintaining a queue of page frames, and the oldest page in the queue is replaced when a new page needs to be loaded.</p>
+      <p>Fairness: The FIFO algorithm is fair in the sense that each page gets an equal chance to be in the memory. The pages that are loaded first are the ones that will be replaced first, so each page has an equal opportunity to be in the memory.</p>
+      <p>Predictability: The FIFO algorithm is predictable in the sense that it always selects the same page to be replaced when a page fault occurs. This predictability can be beneficial in certain situations, such as when trying to reproduce a problem or when testing a system.</p>
+      <p>Low Overhead: The FIFO algorithm has low overhead because it only requires a simple queue to be maintained. This makes it efficient in terms of memory usage and processing power.</p>
+      <p>No thrashing: The FIFO algorithm does not suffer from thrashing, which is a phenomenon where the system spends more time swapping pages in and out of memory than executing actual instructions. This is because the FIFO algorithm always replaces the oldest page, which reduces the likelihood of thrashing.</p>
+    </div> 
+
+    <div class = "MIhir3">
+      <h1>Disadvantages</h1>
+      <p>Belady's Anomaly: FIFO suffers from Belady's Anomaly, which means that adding more physical memory to the system may cause more page faults to occur. This phenomenon contradicts the common sense that adding more memory should always improve performance.</p>
+      <p>Poor performance: FIFO may not perform well in terms of page replacement. In some cases, it may replace a recently used page, leading to more page faults, resulting in a decrease in overall system performance.</p>
+      <p>Limited intelligence: FIFO does not consider the access frequency or the importance of pages in the memory. Pages that are frequently accessed or essential for the system's performance are treated the same way as other pages. This lack of intelligence can lead to suboptimal performance.</p>
+      <p>No consideration of page size: FIFO does not consider the size of pages in the memory. It may evict large pages that hold critical data, leading to significant performance degradation.</p>
+      <p>Inefficient use of memory: FIFO does not take into account the memory's available space. It may keep pages that are not frequently used in memory, leading to inefficient use of memory.</p>
+    </div>
+
+
+      </div>
+  </div>
+  </div>
+
+  <div class="algorithm-div">
+    <h1>Algorithm :</h1>
+    <ul>
+      <p>Initialize a queue data structure to keep track of the pages in memory.</p>
+      <p>For each page request, check if the requested page is already in memory.</p>
+      <p>If the page is not in memory, add it to the end of the queue.</p>
+      <p>If the queue is full (i.e., all page frames are occupied), remove the first page from the front of the queue (i.e., the page that has been in memory for the longest time).</p>
+      <p>Add the new page to the end of the queue.</p>
+      <p>Repeat steps 2-5 for each page request.</p>
+    </ul>
+  
+
+  </div>
+
+  </div>
+  </div>
+  <div class="M">
+    
+</div>
+</div>
+
+  
+</body>
+
+    <style>
+      header{
+        background-color: #037065;
+        color: aliceblue;
+        text-align: center;
+
+        padding: 10px;
+
+        font-size: xx-large;
+        font-weight: 700;
+      }
+
+      input{
+        width: 320px;
+        height: 50px;
+
+        margin: 20px;
+
+        background-color: #151055;
+        color: aliceblue;
+
+        text-align: center;
+        /* font-size: large; */
+        font-weight: 500;
+        border-radius: 30px;
+        border-color: black;
+        border-width: 2px;
+
+      }
+
+      input:focus::placeholder{
+        color: transparent;
+        
+      }
+
+      ::placeholder{
+        text-align: center;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+      }
+
+      button{
+        position: relative;
+
+        width: 80px;
+        height: 60px;
+        border-radius: 20px;
+
+        background-color: rgb(16, 27, 85);
+        color: rgb(51, 252, 37);
+      }
+
+      #SimulationBox{
+        position: relative;
+        background-color: black;
+        width: 400px;
+        height: 300px;
+        margin-left: 40px;
+        top: 10px;
+        color: green;
+        font-size: 1px;
+        font-weight: 700;
+        overflow-y: scroll;
+      }
+
+      #SimulationBox p{
+        font-size: small;
+        font-weight: 900;
+      }
+
+      #SimulationContainer{
+        display: block;
+        position: relative;
+        text-align: center;
+
+      }
+
+      #code{
+        white-space: pre-wrap;
+        font-weight: 600;
+      }
+
+      .main-container {
+        font-family: 'Raleway', sans-serif;
+      }
+
+      .main-container p{
+        font-weight: 600;
+        text-align: justify;
+        padding: 1.3em;
+        padding-top: 0.3em;
+      }
+
+      .main-container h1{
+        color: #9e1e45;
+        text-decoration: none;
+        font-weight: 900;
+        margin-left: 0.7em;
+        padding-top: 2em;
+        text-align: center;
+      }
+
+      .contents{
+        display: flex;
+        padding: 1em;
+      }
+
+      .code-list{
+        margin-left: 2.5em;
+        padding-bottom: 2em;
+      }
+
+      .Mihier{
+        float: left;
+        width: 100%;
+        margin-left: 0.3em;
+      }
+      .algorithm-div{
+        text-align: left;
+        background-color: #f1f1f1;
+        border-color: black;
+        font-weight: 600;
+      }
+
+      .algorithm-div h1{
+        margin-left: 1.7em;
+      }
+
+      .algorithm-div li{
+        list-style-type: none;
+        padding: 1em;
+      }
+
+      .advantages{  
+        font-weight: 600;
+        text-align: justify;
+        padding: 1.3em;
+        padding-top: 0.3em;
+      
+      }
+      .M{
+        float: left;
+        width: 100%;
+        margin-left: 0.3em;
+      }
+
+      .advantages-pic {
+        font-family: 'Raleway', sans-serif;
+        color: rgb(31, 32, 31)d;
+        
+    }
+
+    .advantages img{
+      max-width: 100%;
+      max-height: 220%;
+      
+    }
+    .advantages img{
+      max-width:90%;
+      max-height: 210%;
+    }
+      
+      .MK{  
+        text-align: center;
+        margin-top: 2em;
+        font-family: 'Raleway', sans-serif;
+        color: #5b09b8;
+        font-weight: 900;
+        text-decoration: none;
+      }
+          body{
+            
+            background-color: #ffffff;
+            opacity: 1;
+            background: 0.01;
+            color: rgb(15, 15, 15);
+          }
+
+          h1{
+            color: rgb(171, 152, 152);
+            text-decoration: underline;
+          }
+          .Mihir{
+            background-size: cover;
+            width: 100%;
+            position: absolute;
+            z-index: -1;
+                
+          }
+          .Mkm{
+            
+            color:#5b09b8;
+          }
+          .Dining{
+            width: 30%;
+            justify-content: right;
+            
+            margin: 0 ;align-items: right;
+            left: 70%;
+            position: relative;
+          }
+          .content{
+            position: absolute;
+            top: +200px;
+          }
+          
+          p{
+            font-size: 25px;
+            font-weight: 900;
+          }
+          
+          #Simulate{
+            margin: 20px;
+          }
+
+    </style>
+
+</html>
