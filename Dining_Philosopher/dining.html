@@ -1,0 +1,448 @@
+<html>
+
+<head><title>Dining Philosophers Algorithm</title></head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+
+<body>
+  <header>Philosophers Algorithm</header>
+        <!-- <img class = "Mihir" src="https://img.freepik.com/free-photo/old-camera-notebook-laptop-with-blue-pencil-cup-cappuccino-white-background_23-2147979092.jpg" alt=""> -->
+      <script src="sjf.js"></script>
+
+      <div class="main-container">
+
+  <h1>Introduction</h1>    
+  <p>The Dining Philosophers problem is a classic synchronization problem in computer science that involves multiple processes (or threads) competing for a limited set of resources. In this problem, a group of philosophers are seated around a circular table, each with a plate of spaghetti and a fork to their left and right. The philosophers spend their time thinking and eating, and can only eat when they have both forks.
+  </p>
+  <p></p>
+
+  
+  <input type="text"  id="numPhilosophers" placeholder="Enter Number of Philosophers/Forks/Semaphores" onfocus="clear()">
+  <button onclick="startDining();">Simulate</button>
+  <div id="SimulationContainer">
+    <div id="SimulationBox"></div>
+  </div>
+  <div class="Mihier">
+    <p>   </p>
+
+    <h1>Semaphores :</h1>
+    
+    <p>A Semaphore can be described as an object that consists of a counter, a waiting list of processes, Signal and Wait functions. The most basic use of semaphore is to initialize it to 1. When a thread want to enter a critical section, it calls down and enter the section. When another thread tries to do the same thing, the operation system will put it to the sleep because the value of semaphore is already zero due to previous call to down. When first thread is finished with the critical section, it calls up, which wakes up the other thread that’s waiting to enter.</p>
+    <p>Logically semaphore S is an integer variable that, apart from initialization can only be accessed through two atomic operations :</p>
+    <p>     => Wait(S) or P : If the semaphore value is greater than 0, decrement the value. Otherwise, wait until the value is greater than 0 and then decrement it.</p>
+    <p>     => Signal(S) or V : Increment the value of Semaphore</p>
+  </div>
+  <div class="contents">
+    <div class="advantages  ">
+        <h1>Advantages  :</h1>
+        <img src="./Dining_pic.jpg" alt="">
+    </div>
+    <div class="advantages-pic">
+      <p>        </p>
+      <p>Deadlock prevention: The algorithm ensures that no two philosophers are waiting for the same resource at the same time, thus preventing a deadlock situation.</p>
+
+        <p>Resource allocation: The algorithm ensures that the shared resource (chopsticks) are used efficiently and fairly, preventing monopolization by any philosopher.</p>
+        
+        <p>Scalability: The algorithm is scalable and can be used in a distributed system with multiple processes or threads.</p>
+        <p> Fairness: The algorithm ensures that all philosophers get equal access to the shared resource and that no philosopher is left waiting indefinitely.</p> 
+               
+        <p>Efficiency: The algorithm is designed to minimize the time spent waiting for resources, maximizing the throughput of the system.</p>
+        
+        <p>Robustness: The algorithm is robust in the sense that it can handle various failure scenarios, such as the sudden termination of a philosopher or the loss of communication between processes.</p>
+    </div>
+  </div>
+
+  <div class="contents">  
+    <div class="advantages">
+        <h1>Disadvantages :</h1>
+        <img src="./Fork_pic.jpg" alt="">
+    </div>
+
+    <div class="disadvantages-pic">
+      <div class="disadvantages">
+      <p> </p>
+
+      <p>(1)  Resource utilization: The Dining Philosophers algorithm is not an efficient use of resources. The algorithm may require a significant amount of overhead, especially if there are a large number of philosophers at the table. This can result in a significant decrease in system performance.</p>
+      <p>(2)  Complexity: The algorithm is relatively complex, making it difficult to implement and maintain. This complexity can lead to bugs and other issues that can cause the system to malfunction.</p>
+      <p>(3)  Starvation: The algorithm does not address the issue of starvation. Starvation occurs when a philosopher is unable to eat because other philosophers are consuming all the resources. This can result in the philosopher being blocked indefinitely, which can have a significant impact on system performance.</p>  
+      <p>(4)  Deadlock avoidance: Although the Dining Philosophers algorithm is designed to prevent deadlocks, it is not foolproof. In some cases, the algorithm may not be able to prevent a deadlock, which can result in a system crash or other serious issue.</p>
+    </div>
+  </div>
+  </div>
+
+  <div class="algorithm-div">
+    <h1>Algorithm :</h1>
+    <ul>
+      <li>=>  Define a semaphore for each fork, initialized to 1.</li>
+      <li>=>  Define a semaphore for each fork, initialized to 1.</li>
+      <li>=>  Each philosopher is a separate process (or thread), which repeatedly executes the following steps:\n
+      </li>
+      <li>    &nbsp;a.  Think for a while.&nbsp;</li>
+      <li>    b.  Wait on the table semaphore to ensure that no more than (n - 1) philosophers are eating at the same time.</li>
+      <li>    c.  Wait on the left fork semaphore.</li>
+      <li>    d.  Wait on the right fork semaphore.</li>
+      <li>    e.  Eat for a while.</li>
+      <li>    f.  Release the right fork semaphore.</li>
+      <li>    g. Release the left fork semaphore.</li>
+      <li>    h. Signal the table semaphore to indicate that the philosopher has finished eating.</li>
+      
+      <li>Note that step 3.c and 3.d should be executed atomically (i.e., as a single atomic operation) to prevent the possibility of a deadlock. One way to achieve this is to use a binary semaphore for each philosopher to ensure that only one philosopher can access the forks at a time.</li>
+      
+    </ul>
+    <div class="code" id="code">
+      <h1>code  :</h1>
+      <div class="code-list">
+        const numPhilosophers = 5;<br>
+        const forks = [];<br>
+        const philosophers = [];<br>
+        <br>
+        for (let i = 0; i < numPhilosophers; i++) {<br>
+          forks.push(true);<br>
+        } <br>
+        <br>
+        for (let i = 0; i < numPhilosophers; i++) { <br>
+          philosophers[i] = { <br>
+            leftForkIndex: i, <br>
+            rightForkIndex: (i + 1) % numPhilosophers, <br>
+            eat: function() { <br>
+              if (forks[this.leftForkIndex] && forks[this.rightForkIndex]) { <br>
+                forks[this.leftForkIndex] = false; <br>
+                forks[this.rightForkIndex] = false; <br>
+                console.log(`Philosopher ${i} is eating.`); <br>
+                forks[this.leftForkIndex] = true; <br>
+                forks[this.rightForkIndex] = true; <br>
+                console.log(`Philosopher ${i} is done eating.`); <br>
+              } <br>
+            } <br>
+          } <br>
+        } <br>
+        <br>
+        function startDining() { <br>
+          setInterval(function() { <br>
+            const philosopherIndex = Math.floor(Math.random() * numPhilosophers);
+            philosophers[philosopherIndex].eat();
+          }, 1000);
+        }
+        
+        startDining();
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+  </div>
+  <div class="M">
+    <h1>Result :</h1>
+    
+</div>
+  
+  
+  <h1 class="charts-heading">Charts</h1>
+
+  <div class="charts">
+    <div class="chart-one">
+      <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    </div>
+    <div class="chart-two">
+      <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+    </div>
+  
+  </div>
+
+  <script>
+    var xValues = ["Hungry", "Eating", "Thinking"];
+    var yValues = [55, 49, 44, 24, 15];
+    var barColors = ["red", "green","blue"];
+    
+    new Chart("myChart", {
+      type: "bar",
+      data: {
+        labels: xValues,
+        datasets: [{
+          backgroundColor: barColors,
+          data: yValues
+        }]
+      },
+      options: {
+        legend: {display: false},
+        title: {
+          display: true,
+          text: "Dining philoshoper algorithm"
+        }
+      }
+    });
+
+    // chart two 
+      var xValues = ["Hungry", "Eating", "Thinking"];
+      var yValues = [55, 49, 44];
+      var barColors = [
+        "#b91d47",
+        "#00aba9",
+        "#2b5797",
+        "#e8c3b9",
+        "#1e7145"
+      ];
+
+      new Chart("myChart1", {
+        type: "doughnut",
+        data: {
+          labels: xValues,
+          datasets: [{
+            backgroundColor: barColors,
+            data: yValues
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            text: "Dining philoshoper algorithm"
+          }
+        }
+      });
+    </script>
+</div>
+
+<script src="dining.js"></script>
+
+  
+</body>
+
+    <style>
+      header{
+        background-color: #5b09b8;
+        color: aliceblue;
+        text-align: center;
+
+        padding: 10px;
+
+        font-size: xx-large;
+        font-weight: 700;
+      }
+
+      input{
+        width: 320px;
+        height: 50px;
+
+        margin: 40px;
+
+        background-color: #5b09b8;
+        color: aliceblue;
+
+        text-align: center;
+        /* font-size: large; */
+        font-weight: 500;
+        border-radius: 30px;
+        border-color: black;
+        border-width: 2px;
+
+      }
+
+      input:focus::placeholder{
+        color: transparent;
+        
+      }
+
+      ::placeholder{
+        text-align: center;
+        color: rgb(255, 255, 255);
+        font-weight: 500;
+      }
+
+      button{
+        position: relative;
+
+        width: 80px;
+        height: 60px;
+        border-radius: 20px;
+
+        background-color: rgb(20, 14, 14);
+        color: greenyellow;
+      }
+
+      #SimulationBox{
+        position: relative;
+        background-color: black;
+        width: 400px;
+        height: 300px;
+        margin-left: 40px;
+        top: 10px;
+        color: green;
+        font-size: 1px;
+        font-weight: 700;
+        overflow-y: scroll;
+      }
+
+      #SimulationBox p{
+        font-size: small;
+        font-weight: 900;
+      }
+
+      #SimulationContainer{
+        display: block;
+        position: relative;
+        text-align: center;
+
+      }
+
+      #code{
+        white-space: pre-wrap;
+        font-weight: 600;
+      }
+
+      #myChart{
+        padding: 3em;
+      }
+
+      .charts{
+        display: flex;
+      }
+
+      .charts-heading{
+        color: #090fb8;
+        font-weight: 900;
+        text-decoration: none;
+        margin-bottom: 2em;
+        padding-left: 1.3em;
+      }
+
+      .main-container {
+        font-family: 'Raleway', sans-serif;
+      }
+
+      .main-container p{
+        font-weight: 600;
+        text-align: justify;
+        padding: 1.3em;
+        padding-top: 0.3em;
+      }
+
+      .main-container h1{
+        color: #090fb8;
+        text-decoration: none;
+        font-weight: 900;
+        margin-left: 0.7em;
+        padding-top: 2em;
+      }
+
+      .contents{
+        display: flex;
+        padding: 1em;
+      }
+
+      .code-list{
+        margin-left: 2.5em;
+        padding-bottom: 2em;
+      }
+      .Mihier{
+        float: left;
+        width: 100%;
+        margin-left: 0.3em;
+      }
+      .algorithm-div{
+        text-align: left;
+        background-color: #f1f1f1;
+        border-color: black;
+        font-weight: 600;
+      }
+
+      .algorithm-div h1{
+        margin-left: 1.7em;
+      }
+
+      .algorithm-div li{
+        list-style-type: none;
+        padding: 1em;
+      }
+
+      .advantages{  
+        float: left;
+        width: 100%;
+        margin-left: 0.3em;
+      }
+      .M{
+        float: left;
+        width: 100%;
+        margin-left: 0.3em;
+      }
+
+      .advantages-pic p{
+        
+        color: rgb(31, 32, 31)d;
+        margin-top: 8em;
+        height: 5em;
+        margin-left: 0.2em;
+        margin-bottom: 10000px;
+        
+        line-height: 1.5em;
+        margin: 0em;
+        padding-top: 0em;
+    }
+
+    .advantages img{
+      max-width: 100%;
+      max-height: 220%;
+      
+    }
+    .advantages img{
+      max-width:90%;
+      max-height: 210%;
+    }
+      
+      .MK{  
+        text-align: center;
+        margin-top: 2em;
+        font-family: 'Raleway', sans-serif;
+        color: #5b09b8;
+        font-weight: 900;
+        text-decoration: none;
+      }
+          body{
+            
+            background-color: #ffffff;
+            opacity: 1;
+            background: 0.01;
+            color: rgb(15, 15, 15);
+          }
+
+          h1{
+            color: rgb(171, 152, 152);
+            text-decoration: underline;
+          }
+          .Mihir{
+            background-size: cover;
+            width: 100%;
+            position: absolute;
+            z-index: -1;
+                
+          }
+          .Mkm{
+            
+            color:#5b09b8;
+          }
+          .Dining{
+            width: 30%;
+            justify-content: right;
+            
+            margin: 0 ;align-items: right;
+            left: 70%;
+            position: relative;
+          }
+          .content{
+            position: absolute;
+            top: +200px;
+          }
+          
+          p{
+            font-size: 25px;
+            font-weight: 900;
+          }
+          
+
+    </style>
+
+</html>
