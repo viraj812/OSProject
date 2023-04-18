@@ -1,0 +1,198 @@
+<html>
+    <head>
+        
+        <header><h1>OS Algorithms</h1></header>
+        <title>Operating Sytem Algorithms</title>
+        
+    </head>
+    
+    
+    <body>
+        
+        <script src="../Index/index.js"></script>
+        <p id="theory">What is an operating system?</p>
+        <p id="content">An operating system (OS) is the program that, after being initially loaded into the computer by a boot program, manages all of the other application programs in a computer. The application programs make use of the operating system by making requests for services through a defined application program interface (API). In addition, users can interact directly with the operating system through a user interface, such as a command-line interface (CLI) or a graphical UI (GUI).</p>
+
+
+        <div class="dropdown">
+            <button onclick="show()">Select Algorithm</button>
+
+        <div class="dropdown-content" id="dropdown-content">
+
+            <a href="../SJF/sjf.html">Shortest Job First CPU Scheduling Algorithm</a>
+
+            <a href="../Dining_Philosopher/dining.html">Dining Philosophers Algorithm</a>
+
+            <a href="../CLook/clook.html">C Look Disk Scheduling Algorithm</a>
+
+            <a href="../FIFO/fifo.html">First In First Out Page Replacement Algorithm</a>
+
+        </div>
+        </div>
+
+        <div class="box-container">
+
+            <div id="box1" onclick="openPage('../SJF/sjf.html')">
+                <p class="heading">Shortest Job First Algorithm</p>
+                <p>Shortest job first is a scheduling algorithm in which the process with the smallest execution time is selected for execution next. Shortest job first can be either preemptive or non-preemptive. Owing to its simple nature, shortest job first is considered optimal.</p>
+            </div>
+
+            <div id="box2" onclick="openPage('../Dining/dining.html')">
+                <p class="heading"> Dining philosophers problem with semaphore </p>
+
+                <p>The Dining Philosophers problem can be solved using semaphores, which are a type of synchronization mechanism used in concurrent programming. Semaphores are a way to protect shared resources by controlling access to them and ensuring that only one process can access the resource at a time. </p>
+                
+            </div>
+            <p></p>
+            <div id="box3" onclick="openPage('../CLook/clook.html')">
+                <p class="heading">C Look Disk Scheduling Algorithm</p>
+                <p>The Look (also known as "Scan") and C-Look (also known as "Circular Scan") disk scheduling algorithms are two closely related methods used to optimize the movement of read/write heads on a hard disk. </p>
+            </div>
+            <div id="box4" onclick="openPage('../FIFO/fifo.html')">
+                <p class="heading">First In First Out Page Replacement Algorithm</p>
+            <p>FIFO maintains a queue of pages in the order they arrived. When a new page needs to be brought into memory, the page at the front of the queue (the oldest page) is removed, and the new page is added to the back of the queue.</p>
+            </div>
+            
+        </div>
+
+    </body>
+    <script src="//code.tidio.co/qifko0fwmeto2zba2cllimxpoctqd30l.js"></script> 
+
+        <style>
+
+            header{
+                color: rgb(0, 0, 0);
+                background-image: url("../Index/headerbg.jpg");
+            }
+            h1{
+                text-align: center;
+                font-size: xxx-large;
+                text-decoration: underline solid white ;
+                color: rgb(0, 0, 0);
+            }
+            
+            body{
+                background-image: url("../Index/bodybg.jpg");
+                background-size: 100%;
+                margin-left: 50px;
+                margin-right: 50px;
+            }
+
+            button{
+                position: relative;
+                top: 30px;
+                background-color: rgb(28, 15, 15);
+                color: rgb(36, 178, 36);
+                border-color: azure;
+
+                font-weight:700;
+                padding: 20px 20px;
+                font-size: 18px;
+
+                border-radius: 20px 20px 20px 20px;
+            }
+
+            .dropdown{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .dropdown-content{
+                position: absolute;
+                display: none;
+                min-width: 200px;
+                top: 100px;
+                box-shadow: 0px 8px 16px 0px rgba(33, 29, 92, 0.2);
+                z-index: 1;
+            }
+            
+            .dropdown-content a {
+                display: block;
+                position: relative;
+                padding: 20px 20px;
+                width: 90%;
+                background-color: rgb(0, 0, 0);
+                border-style:dotted;
+                border-radius: 10px 10px 10px 10px;
+                border-color: antiquewhite;
+                color: rgb(255, 255, 255);
+                text-decoration: none;
+            }
+
+
+            a:hover{background-color: rgb(11, 110, 26);}
+
+            #theory{
+                font-family: 'Courier New', Courier, monospace;
+                font-size: 35px;
+                font-weight: bolder;
+                color: rgb(255, 255, 255);
+            }
+            
+            #content{
+                font-size: 30px;
+                font-weight: bold;
+                color: aliceblue;
+            }
+            
+            .box-container{
+                position: relative;
+                top: 20px;
+            }
+            
+            .box-container div{
+                /* text-align: center; */
+                display: inline-block;
+                vertical-align: top;
+                position: relative;
+
+                height: 400px;
+                width: 400px;
+
+
+                margin: 50px;
+                padding: 20px 30px;
+
+                border-radius: 20px 20px 20px 20px;
+                font-size: 20px;
+                font-weight: 700;
+                font-family: 'Courier New', Courier, monospace;
+
+                box-shadow: 20px 20px 5px 2px;
+            }
+
+            .box-container {
+                display: flex; /* display the child elements in a flexible layout */
+            flex-wrap: wrap; /* allow the child elements to wrap to a new line if necessary */
+            justify-content: center; /* horizontally center the child elements */
+            align-items: center; /* vertically center the child elements */
+            }
+
+            
+            #box1{
+                background-color: rgb(25, 122, 182);
+            }
+            
+            #box2{
+                background-color: orange;
+            }
+
+            #box3{
+                background-color: rgb(148, 44, 44);
+            }
+
+            #box4{
+                background-color: rgb(36, 115, 36);
+            }
+
+            .heading{
+                font-size: 30px;
+                font-weight: bolder;
+                color: aliceblue;
+                margin-bottom: 30px;
+            }
+        </style>
+
+</html>
